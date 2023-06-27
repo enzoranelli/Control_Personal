@@ -1,6 +1,10 @@
 import './styles/App.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import Boton from './components/boton';
+import Logo from './components/Logo';
+import cruz from './images/mas.png';
+import lupa from './images/busqueda.png';
 
 function App() {
   const [peticion, setPeticion] = useState('');
@@ -30,12 +34,17 @@ function App() {
         {/* Peticion de prueba a mi server 
 
         <h1>{peticion}</h1>
-
+        <p>{`Hola soy ${peticion.nombre}, tengo ${peticion.edad} años y trabajo de ${peticion.ocupacion}`}</p>
         */
         }
-        <p>{`Hola soy ${peticion.nombre}, tengo ${peticion.edad} años y trabajo de ${peticion.ocupacion}`}</p>
-        <h1>con react</h1>
-        <button onClick={verPeti}>Hacer clic</button>
+        <Logo></Logo>
+        <div className='contenedor-botones'>
+          
+          <Boton texto='Hacer Consulta' imagen={lupa}/>
+          <Boton texto='Configurar y ver listado' imagen={cruz}/>
+        </div>
+        
+        
       </>
       
   )
