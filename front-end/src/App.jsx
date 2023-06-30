@@ -8,8 +8,8 @@ import lupa from './images/busqueda.png';
 
 function App() {
 
-  const [peticion, setPeticion] = useState('');
-
+  const [peticion, setPeticion] = useState([]);
+  
   const verPeti=()=>{
     console.log(peticion);
     
@@ -18,9 +18,9 @@ function App() {
   useEffect(()=>{
     const fetchData = async() => {
       try {
-        const response = await axios.get('http://localhost:9000/')
-        setPeticion(response.data)
-        verPeti();
+        const response = await axios.get('http://localhost:9000/api');
+        setPeticion(response.data);
+      
         
       } catch (error) {
         console.log(error);
@@ -31,18 +31,26 @@ function App() {
 
   return (
       <>
-        {/* Peticion de prueba a mi server 
-
-        <h1>{peticion}</h1>
-        <p>{`Hola soy ${peticion.nombre}, tengo ${peticion.edad} años y trabajo de ${peticion.ocupacion}`}</p>
-        */
-        }
+        
+        
+        
         <Logo></Logo>
         <div className='contenedor-botones'>
-          
+        
           <Boton texto='Hacer Consulta' imagen={lupa}/>
           <Boton texto='Configurar y ver listado' imagen={cruz}/>
+          
         </div>
+
+      <div>
+        {peticion.map((item, index) => (
+          <div key={index}>
+            <h1>{item.Nombre}</h1>
+            <p>{item.direccion}</p>
+            <p>{item.seccion}</p>
+          </div>
+        ))}
+      </div>
         
         
       </>

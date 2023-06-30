@@ -30,26 +30,21 @@ CREATE TABLE Ingreso_Salida(
     FOREIGN KEY(Persona) REFERENCES personal(idPersonal) 
 );
 
-INSERT
-    INTO
-        personal
-    VALUES
-(int,'Enzo Ranelli',44706466,'programador',1166032130,'enzo.ranelli@gmail.com',1,'primer piso',8);
 
 INSERT
     INTO
         personal
     VALUES
-(NULL,'Enzo Ranelli',4470666,'programador',1166032130,'enzo.ranelli@gmail.com',1,'primer piso',8);
+(NULL,'Enzo Ranelli',44706466,'programador',1166032130,'enzo.ranelli@gmail.com','CALLE 123',1,8);
 
 INSERT
     INTO
         personal
     VALUES
-(NULL,'Enzo Ranelli',447044666,'programador',1166032130,'enzo.ranelli@gmail.com','CALLE 123',1,8);
+(NULL,'Carlos Perez',24706466,'contador',1154087130,'carlos.perez@gmail.com','CALLE 876',1,10);
 
 SELECT * FROM personal;
 DELETE FROM personal;
-
+SET SQL_SAFE_UPDATES=0;
 
 
