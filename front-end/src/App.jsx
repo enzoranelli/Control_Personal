@@ -7,13 +7,14 @@ import cruz from './images/mas.png';
 import lupa from './images/busqueda.png';
 
 function App() {
-  const [peticion, setPeticion] = useState('');
 
+  const [peticion, setPeticion] = useState('');
 
   const verPeti=()=>{
     console.log(peticion);
     
   };
+
   useEffect(()=>{
     const fetchData = async() => {
       try {
@@ -28,7 +29,6 @@ function App() {
    fetchData();
   },[]);
 
-  
   return (
       <>
         {/* Peticion de prueba a mi server 
