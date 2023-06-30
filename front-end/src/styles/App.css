@@ -1,6 +1,15 @@
+.contenedor-principal{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.contenedor-empleados{
+    width: 40%;
+    background-color: aquamarine;
+    margin-right: 100px;
+}
 .imagen-logo{
     width:200px;
-    margin-bottom: 20px;
 }
 
 .boton{

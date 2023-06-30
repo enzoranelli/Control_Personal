@@ -34,24 +34,25 @@ function App() {
         
         
         
-        <Logo></Logo>
+      <Logo></Logo>
+      <div className='contenedor-principal'>
         <div className='contenedor-botones'>
-        
+          
           <Boton texto='Hacer Consulta' imagen={lupa}/>
           <Boton texto='Configurar y ver listado' imagen={cruz}/>
-          
+            
         </div>
 
-      <div>
-        {peticion.map((item, index) => (
-          <div key={index}>
-            <h1>{item.Nombre}</h1>
-            <p>{item.direccion}</p>
-            <p>{item.seccion}</p>
-          </div>
-        ))}
-      </div>
-        
+        <div className='contenedor-empleados'>
+          {peticion.map((item, index) => (
+            <div key={index}>
+              <h1>{item.Nombre}</h1>
+              <p><b>Direccion: </b>{item.direccion}</p>
+              <p><b>Seccion de trabajo:</b>{item.seccion}</p>
+            </div>
+          ))}
+        </div>
+      </div> 
         
       </>
       
