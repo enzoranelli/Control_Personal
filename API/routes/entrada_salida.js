@@ -1,11 +1,12 @@
 const express = require('express');
-const routes = express.Router();
+const entryExit = express.Router();
 
-routes.get('/',(req,res)=>{
+
+entryExit.get('/',(req,res)=>{
     req.getConnection((err, conn)=>{
         if(err) return res.send(err)
 
-        conn.query('SELECT * FROM personal;',(err, rows)=>{
+        conn.query('SELECT * FROM ingreso_salida;',(err, rows)=>{
             if(err) return res.send(err)
 
 
@@ -15,5 +16,4 @@ routes.get('/',(req,res)=>{
 });
 
 
-
-module.exports = routes;
+module.exports = entryExit;

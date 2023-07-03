@@ -2,7 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const myconn = require('express-myconnection');
-const routes = require('./routes');
+const personal = require('./routes/personal');
+const huella = require('./routes/huella');
+const entrada_salida = require('./routes/entrada_salida');
 
 const app =express();
 
@@ -20,14 +22,20 @@ const dboptions = {
 
 app.use(cors());
 app.use(myconn(mysql, dboptions, 'single'));
-
+app.use(express.json());
 
 //Rutas---------------------------------------
 
 app.get('/',(req, res) =>{
     res.send('Bienvenido a mi api');
 });
-app.use('/api', routes);
+
+app.use('/personal', personal);
+
+app.use('/huella',huella);
+
+app.use('/entradasalida',entrada_salida)
+
 //Servidor Corriendo--------------------------
 
 app.listen(9000, ()=>{
