@@ -1,10 +1,14 @@
 import './styles/App.css';
 import { useState,useEffect } from 'react';
+import DataTable from 'react-data-table-component';
 import axios from 'axios';
 import Boton from './components/boton';
 import Logo from './components/Logo';
 import cruz from './images/mas.png';
 import lupa from './images/busqueda.png';
+
+
+
 
 function App() {
 
@@ -15,12 +19,52 @@ function App() {
     
   };
 
+  const colums = [
+    {
+      name: 'Documento',
+      selector: row => row.DNI
+    },
+    {
+     name: 'Nombre',
+     selector: row => row.Nombre
+    },
+    {
+      name: 'Telefono',
+      selector: row => row.telefono
+    },
+    {
+      name: 'Puesto',
+      selector: row => row.puesto
+    },
+    {
+      name: 'Horas de trabajo',
+      compact: true,
+      selector: row => row.horasTrabajoXDia
+    },
+    {
+      name: 'Sección',
+      compact: true,
+      selector: row => row.seccion
+    },
+    {
+      name: 'Dirección',
+      compact: true,
+      selector: row => row.direccion
+    },
+    {
+      name: 'Correo electronico',
+      minWidth: '60',
+      selector: row => row.correo
+    }
+    
+    
+  ]
   useEffect(()=>{
     const fetchData = async() => {
       try {
-        const response = await axios.get('http://localhost:9000/api');
+        const response = await axios.get('http://localhost:9000/personal');
         setPeticion(response.data);
-      
+        console.log(peticion)
         
       } catch (error) {
         console.log(error);
@@ -38,20 +82,15 @@ function App() {
       <div className='contenedor-principal'>
         <div className='contenedor-botones'>
           
-          <Boton texto='Hacer Consulta' imagen={lupa}/>
-          <Boton texto='Configurar y ver listado' imagen={cruz}/>
+          <Boton texto='Hacer Consulta' imagen={lupa} url='consulta'/>
+          <Boton texto='Configurar y ver listado' imagen={cruz} url='formulario'/>
             
         </div>
 
         <div className='contenedor-empleados'>
-          {peticion.map((item, index) => (
-            <div key={index}>
-              <h1>{item.Nombre}</h1>
-              <p><b>Direccion: </b>{item.direccion}</p>
-              <p><b>Seccion de trabajo:</b>{item.seccion}</p>
-            </div>
-          ))}
+          <DataTable columns={colums} data={peticion}/>
         </div>
+        
       </div> 
         
       </>

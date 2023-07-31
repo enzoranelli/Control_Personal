@@ -43,6 +43,12 @@ INSERT
     VALUES
 (NULL,'Carlos Perez',24706466,'contador',1154087130,'carlos.perez@gmail.com','CALLE 876',1,10);
 
+INSERT
+    INTO
+        personal
+    VALUES
+(NULL,'Maria Juana',3345671,'Tech Leader',2147483647,'mariajuana@gmail.com','CALLE 7345634',4,6);
+
 SELECT * FROM personal;
 DELETE FROM personal;
 SET SQL_SAFE_UPDATES=0;

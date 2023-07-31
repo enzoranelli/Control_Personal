@@ -1,21 +1,24 @@
 .contenedor-principal{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 }
 .contenedor-empleados{
-    width: 40%;
-    background-color: aquamarine;
-    margin-right: 100px;
+    
+    width: 60%;
 }
 .imagen-logo{
     width:200px;
 }
-
+.link{
+    text-decoration: none;
+    width: 90%;
+}
 .boton{
     display: flex;
     margin: 5% 0 0 5%;
-    width: 100%;
+    width: 70%;
     padding: 20px 20px 20px 20px;
     background-color: white;
     color: black;
@@ -39,8 +42,8 @@
    
 }
 .contenedor-botones{
-    padding-top: 5%;
-    padding-left: 10%;
+  
+   
     display: flex;
     flex-direction: column;
     align-items: center;
