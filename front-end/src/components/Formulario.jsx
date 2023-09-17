@@ -5,12 +5,14 @@ import axios from 'axios';
 
 function Formulario(){
     const {register, handleSubmit} = useForm();
-    
+    const headers={
+        "ngrok-skip-browser-warning": "69420",
+      }
     const onSubmit = (data) =>{
-        const apiUrl = 'http://localhost:9000/personal';
+        const apiUrl = 'https://ladybird-viable-barnacle.ngrok-free.app/personal';
 
-        // Realizar una solicitud POST utilizando Axios
-        axios.post(apiUrl, data)
+        // Realiza una solicitud POST utilizando Axios
+        axios.post(apiUrl, data, {headers})
         .then((response) => {
             console.log('Respuesta de la API:', response.data);
         })

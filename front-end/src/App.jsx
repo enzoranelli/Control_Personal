@@ -13,7 +13,9 @@ import lupa from './images/busqueda.png';
 function App() {
 
   const [peticion, setPeticion] = useState([]);
-  
+  const headers={
+    "ngrok-skip-browser-warning": "69420",
+  }
   const verPeti=()=>{
     console.log(peticion);
     
@@ -60,9 +62,10 @@ function App() {
     
   ]
   useEffect(()=>{
+
     const fetchData = async() => {
       try {
-        const response = await axios.get('http://localhost:9000/personal');
+        const response = await axios.get('https://ladybird-viable-barnacle.ngrok-free.app/personal', {headers});
         setPeticion(response.data);
         console.log(peticion)
         
