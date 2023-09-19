@@ -1,25 +1,33 @@
-import './styles/App.css';
+import '../styles/App.css';
 import { useState,useEffect } from 'react';
 import DataTable from 'react-data-table-component';
 import axios from 'axios';
-import Boton from './components/boton';
-import Logo from './components/Logo';
-import cruz from './images/mas.png';
-import lupa from './images/busqueda.png';
-
-
+import Boton from '../components/boton';
+import Logo from '../components/Logo';
+import cruz from '../images/mas.png';
+import lupa from '../images/busqueda.png';
+import {API_URL} from '../auth/constantes';
+import { useAuth } from '../auth/authProvider.jsx';
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 function App() {
-
+  const auth = useAuth();
   const [peticion, setPeticion] = useState([]);
-  const headers={
+  /*const headers={
     "ngrok-skip-browser-warning": "69420",
-  }
+  }*/
   const verPeti=()=>{
     console.log(peticion);
     
   };
+
+  if (!auth.isAuthenticated) {
+    return <Navigate to="/" />;
+  }
+  if (auth.userRole !== "admin") {
+    return <Navigate to="/home" />; 
+  }
 
   const colums = [
     {
@@ -65,10 +73,14 @@ function App() {
 
     const fetchData = async() => {
       try {
-        const response = await axios.get('https://ladybird-viable-barnacle.ngrok-free.app/personal', {headers});
-        setPeticion(response.data);
-        console.log(peticion)
+        const response = await axios.get(`${API_URL}/personal`);
         
+       
+        if(response.status === 200){
+          console.log('datos recibidos correctamente');
+         
+          setPeticion(response.data)
+        }
       } catch (error) {
         console.log(error);
       } 
@@ -91,7 +103,7 @@ function App() {
         </div>
 
         <div className='contenedor-empleados'>
-          <DataTable columns={colums} data={peticion}/>
+          <DataTable columns={colums} data={peticion.body}/>
         </div>
         
       </div> 

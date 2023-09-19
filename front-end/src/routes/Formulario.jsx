@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import {API_URL} from '../auth/constantes'
 
 
 function Formulario(){
     const {register, handleSubmit} = useForm();
-    const headers={
+    /*const headers={
         "ngrok-skip-browser-warning": "69420",
-      }
+    }*/
     const onSubmit = (data) =>{
-        const apiUrl = 'https://ladybird-viable-barnacle.ngrok-free.app/personal';
+        const apiUrl = `${API_URL}/personal`;
 
         // Realiza una solicitud POST utilizando Axios
-        axios.post(apiUrl, data, {headers})
+        axios.post(apiUrl, data)
         .then((response) => {
             console.log('Respuesta de la API:', response.data);
         })
