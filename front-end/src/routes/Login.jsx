@@ -3,9 +3,10 @@ import {useState} from "react";
 import { useAuth } from '../auth/authProvider.jsx';
 import { Navigate, useNavigate } from "react-router-dom";
 import { API_URL } from "../auth/constantes.js";
+import axios from 'axios';
 
 export default function Login(){
-    const [username, setUsername] = useState('');
+    const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
     const [errorResponse, setErrorResponse] = useState('');
 
@@ -14,12 +15,27 @@ export default function Login(){
 
 
     
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
-        auth.autenticar('normal');
+        try {
+            const apiUrl = `${API_URL}/login`;
+            const data = {correo: correo, password: password};
+            // Realiza una solicitud POST utilizando Axios
+            axios.post(apiUrl, data)
+            .then((response) => {
+                console.log(response)
+                auth.guardarUsuario(response.data.body);
+                
+            })
+            .catch((error) => {
+                console.error('Error al enviar el JSON:', error);
+            });
+        } catch (error) {
+            console.error('Error al enviar el JSON:', error);
+        }
     }
 
-    console.log(auth.isAuthenticated)
+   
     if(auth.isAuthenticated){
         return <Navigate to='/dashboard'/>
     }
@@ -29,11 +45,11 @@ export default function Login(){
             <form className="form" onSubmit={handleSubmit}>
                 <h1>Login</h1>
                 
-                <label>Username</label>
+                <label>Correo</label>
                 <input 
                     type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)} 
+                    value={correo}
+                    onChange={(e) => setCorreo(e.target.value)} 
                 />
 
                 <label>Contraseña</label>

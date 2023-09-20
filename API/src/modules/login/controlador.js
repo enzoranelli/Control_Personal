@@ -1,4 +1,4 @@
-const TABLA = 'personal';
+const TABLA = 'usuario';
 
 module.exports = function(dbjinyec){
     
@@ -16,22 +16,12 @@ module.exports = function(dbjinyec){
         return db.uno(TABLA,id);
     }
 
-    function agregar(data){
-        return db.agregar(TABLA,data);
-    }
-
-    function agregarUsuario(data){
-        return db.agregarUsuario(data);
-    }
-
-    function buscarId(dni){
-        return db.buscarId(dni);
+    function existe(correo){
+        return db.existe(TABLA, correo);
     }
     return {
         todos,
         uno,
-        agregar,
-        agregarUsuario,
-        buscarId,
+        existe,
     }
 }
