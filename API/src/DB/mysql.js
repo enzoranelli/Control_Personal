@@ -86,6 +86,18 @@ function buscarId(dni){
     });
 }
 
+function buscarXQR(qr){
+    return new Promise((resolve,reject)=>{
+        conexion.query(`SELECT Persona FROM usuario WHERE qr = '${qr}'`,(error,result)=>{
+            if(error){
+                return reject(error);
+            }
+
+            return result.length === 0 ? reject(error) : resolve(result);
+        })
+    });
+}
+
 function existe(tabla, correo){
     return new Promise((resolve, reject)=>{
         conexion.query(`SELECT * FROM ${tabla} WHERE correo = '${correo}'`, (error,result)=>{
@@ -108,4 +120,5 @@ module.exports = {
     agregar,
     agregarUsuario,
     buscarId,
+    buscarXQR,
 }

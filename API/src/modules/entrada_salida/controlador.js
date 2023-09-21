@@ -1,4 +1,4 @@
-const TABLA = 'entrada_salida';
+const TABLA = 'ingreso_salida';
 
 module.exports = function(dbjinyec){
     
@@ -8,16 +8,16 @@ module.exports = function(dbjinyec){
         db = require('../../DB/mysql.js');
     }
 
-    function buscarQr(){
-        return db.todos(TABLA);
+    function buscarQr(qr){
+        return db.buscarXQR(qr);
     }
 
+    function agregar(data){
+        return db.agregar(TABLA,data);
+    }
     
     return {
-        todos,
-        uno,
+        buscarQr,
         agregar,
-        agregarUsuario,
-        buscarId,
     }
 }

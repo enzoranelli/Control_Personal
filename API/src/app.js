@@ -7,11 +7,13 @@ const config = require('./config.js');
 const app =express();
 const personal = require('./modules/personal/rutas.js');
 const login = require('./modules/login/rutas.js');
+const entrada_salida = require('./modules/entrada_salida/rutas.js');
 
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', config.app.port);
 
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname,'public','views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').renderFile);
 
@@ -25,11 +27,11 @@ app.use(morgan('dev'));
 //Rutas---------------------------------------
 
 app.get('/',(req, res) =>{
-    res.render('index.html');
+    res.render('Escaner/index');
 });
 
 app.use('/api/personal', personal);
 app.use('/api/login', login);
-
+app.use('/api/entrada_salida', entrada_salida);
 
 module.exports = app;
