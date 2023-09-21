@@ -8,7 +8,7 @@ import cruz from '../images/mas.png';
 import lupa from '../images/busqueda.png';
 import {API_URL} from '../auth/constantes';
 import { useAuth } from '../auth/authProvider.jsx';
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 
 function App() {
@@ -65,7 +65,13 @@ function App() {
       name: 'Correo electronico',
       minWidth: '60',
       selector: row => row.correo
-    }
+    },
+    {
+      name: 'Acciones',
+      cell: (row) => (
+        <Link to={`/detalle/${row.id}`}>Ver Detalles</Link>
+      ),
+    },
     
     
   ]
@@ -78,7 +84,7 @@ function App() {
        
         if(response.status === 200){
           console.log('datos recibidos correctamente');
-         
+          console.log(response.data)
           setPeticion(response.data)
         }
       } catch (error) {
@@ -97,8 +103,8 @@ function App() {
       <div className='contenedor-principal'>
         <div className='contenedor-botones'>
           
-          <Boton texto='Hacer Consulta' imagen={lupa} url='consulta'/>
-          <Boton texto='Configurar y ver listado' imagen={cruz} url='formulario'/>
+          {/*<Boton texto='Hacer Consulta' imagen={lupa} url='consulta'/>*/}
+          <Boton texto='Agregar empleado nuevo' imagen={cruz} url='formulario'/>
             
         </div>
 

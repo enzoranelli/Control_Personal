@@ -8,6 +8,7 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import './styles/index.css';
 import { AuthProvider } from './auth/authProvider.jsx';
 import { Home } from './routes/home.jsx';
+import Detalle from './routes/Detalle.jsx';
 
 
 const router = createBrowserRouter([
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
       {
         path:'/home',
         element:<Home />,
-      }
+      },
+      {
+        path: '/detalle/:id',
+        element: <Detalle />,
+      },
     ],
   }
 ]);
