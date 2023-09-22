@@ -6,6 +6,7 @@ import {API_URL} from '../auth/constantes'
 
 function Formulario(){
     const {register, handleSubmit} = useForm();
+  
     /*const headers={
         "ngrok-skip-browser-warning": "69420",
     }*/
@@ -47,7 +48,7 @@ function Formulario(){
 
     return(
         <div>
-            <Link to={"/"}>Volver al inicio</Link>
+            <Link to={"/dashboard"}>Volver al inicio</Link>
             <h1>Agregar empleado</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div>
@@ -89,12 +90,12 @@ function Formulario(){
 
                 <div>
                     <label>Correo electronico</label>
-                    <input type="email" {...register('correo')}></input>
+                    <input type="email"  {...register('correo',{autoComplete:"off"})}></input>
                 </div>
 
                 <div>
                     <label>Contraseña</label>
-                    <input type="password" {...register('contrasena')}></input>
+                    <input type="password"  {...register('contrasena',{autoComplete:"off"})}></input>
                 </div>
 
                 <div>

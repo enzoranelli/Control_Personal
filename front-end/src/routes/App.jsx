@@ -9,18 +9,15 @@ import lupa from '../images/busqueda.png';
 import {API_URL} from '../auth/constantes';
 import { useAuth } from '../auth/authProvider.jsx';
 import { Navigate, useNavigate, Link } from "react-router-dom";
-
+import NoHayDatos from '../components/noHayDatos';
 
 function App() {
   const auth = useAuth();
   const [peticion, setPeticion] = useState([]);
-  /*const headers={
+  const headers={
     "ngrok-skip-browser-warning": "69420",
-  }*/
-  const verPeti=()=>{
-    console.log(peticion);
-    
-  };
+  }
+ 
 
   if (!auth.isAuthenticated) {
     return <Navigate to="/" />;
@@ -44,7 +41,12 @@ function App() {
     },
     {
       name: 'Puesto',
-      selector: row => row.puesto
+      selector: row => row.puesto,
+      cell: (row)=>(
+        <div style={{ overflow: 'visible', whiteSpace: 'normal' }}>
+          {row.puesto}
+        </div>
+      ),
     },
     {
       name: 'Horas de trabajo',
@@ -59,7 +61,12 @@ function App() {
     {
       name: 'Dirección',
       compact: true,
-      selector: row => row.direccion
+      selector: row => row.direccion,
+      cell: (row)=>(
+        <div style={{ overflow: 'visible', whiteSpace: 'normal' }}>
+          {row.direccion}
+        </div>
+      ),
     },
     {
       name: 'Correo electronico',
@@ -79,7 +86,7 @@ function App() {
 
     const fetchData = async() => {
       try {
-        const response = await axios.get(`${API_URL}/personal`);
+        const response = await axios.get(`${API_URL}/personal`,{headers:headers});
         
        
         if(response.status === 200){
@@ -109,7 +116,7 @@ function App() {
         </div>
 
         <div className='contenedor-empleados'>
-          <DataTable columns={colums} data={peticion.body}/>
+          <DataTable columns={colums} data={peticion.body} noDataComponent={<NoHayDatos />}/>
         </div>
         
       </div> 

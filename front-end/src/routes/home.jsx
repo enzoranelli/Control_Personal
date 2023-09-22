@@ -36,7 +36,7 @@ export function Home(){
     
     return (
         <>
-            <Link to={"/"}>Volver al inicio</Link>
+            <Link to={`/Detalle/${auth.getUser()?.Persona || ''}`}>Ver Actividad</Link>
             
             <h1>Empleado normal de {auth.getUser()?.correo || ''}</h1>
 

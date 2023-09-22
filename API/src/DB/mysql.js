@@ -1,5 +1,6 @@
 const mysql = require('mysql');
 const config = require('../config.js');
+const { error } = require('../red/respuestas.js');
 
 const dbconfig = {
     host : config.mysql.host,
@@ -58,6 +59,18 @@ function agregarUsuario(data){
     });
 }
 
+function entradaSalida(tabla, id){
+    return new Promise((resolve,reject)=>{
+        conexion.query(`SELECT * FROM ${tabla} WHERE Persona=${id}`,(error,result)=>{
+            console.log('Entre en consulta')
+            if(error){
+                return reject(error);
+            }else{
+                return resolve(result);
+            }
+        })
+    })
+}
 function uno(tabla, id){
     return new Promise((resolve, reject)=>{
         conexion.query(`SELECT * FROM ${tabla} WHERE id=${id}`, (error, result)=>{
@@ -121,4 +134,5 @@ module.exports = {
     agregarUsuario,
     buscarId,
     buscarXQR,
+    entradaSalida,
 }

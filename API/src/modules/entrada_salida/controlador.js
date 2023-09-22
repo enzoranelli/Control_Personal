@@ -15,9 +15,15 @@ module.exports = function(dbjinyec){
     function agregar(data){
         return db.agregar(TABLA,data);
     }
+
+    function entradaSalida(id){
+        return db.entradaSalida(TABLA, id);
+    }
     
     return {
         buscarQr,
         agregar,
+        entradaSalida,
+        
     }
 }

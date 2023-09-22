@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-
+const {format} = require('date-fns');
 const controlador = require('./index.js');
 const respuestas = require('../../red/respuestas.js');
 
 router.post('/',ingresoEgreso);
-
+router.get('/:id', entradaSalida);
 
 async function ingresoEgreso(req,res){
     try {
@@ -45,6 +45,28 @@ async function ingresoEgreso(req,res){
 
     }catch(err){
        respuestas.error(req, res,'error al buscar qr',500);
+    }
+}
+
+
+async function entradaSalida(req,res){
+    try {
+        
+        const entradaSalida = await controlador.entradaSalida(req.params['id']);
+        console.log(entradaSalida)
+        const datos = entradaSalida.map((row)=>{
+            const fecha = new Date(row.Fecha);
+            const fechaFormateada = format(fecha, 'dd/MM/yyyy HH:mm:ss');
+            return {
+                ...row,
+                Fecha: fechaFormateada,
+            };
+        })
+        console.log(datos);
+        respuestas.success(req,res,datos,200)
+
+    } catch (error) {
+        respuestas.error(req, res,'error al conectar a base de datos',500);
     }
 }
 module.exports = router;
