@@ -1,24 +1,27 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {API_URL} from '../auth/constantes'
-
+import '../styles/Formulario.css';
 
 function Formulario(){
     const {register, handleSubmit} = useForm();
-  
-    /*const headers={
+    const navigate = useNavigate()
+    const headers={
         "ngrok-skip-browser-warning": "69420",
-    }*/
+    }
     const onSubmit = (data) =>{
         const apiUrl = `${API_URL}/personal`;
         const verificar = verificarFormulario(data);
         // Realiza una solicitud POST utilizando Axios
         console.log(verificar)
         if(verificar){
-            axios.post(apiUrl, data)
+            axios.post(apiUrl, data, {headers:headers})
             .then((response) => {
                 console.log('Respuesta de la API:', response.data);
+                alert('Empleado agregado correctamente!!');
+                navigate('/dashboard');
             })
             .catch((error) => {
                 console.error('Error al enviar el JSON:', error);
@@ -48,66 +51,67 @@ function Formulario(){
 
     return(
         <div>
-            <Link to={"/dashboard"}>Volver al inicio</Link>
+            <Link to={"/dashboard"}><button className="boton-volver">Volver al inicio</button></Link>
             <h1>Agregar empleado</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
+                <div className="contenedor-input">
                     <label>Nombre</label>
-                    <input type="text" {...register('Nombre')}></input>
+                    <input type="text" className="input-text" {...register('Nombre')}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Documento</label>
-                    <input type="number" {...register('DNI')}></input>
+                    <input type="number" className="input-text" {...register('DNI')}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Puesto</label>
-                    <input type="text" {...register('puesto')}></input>
+                    <input type="text" className="input-text" {...register('puesto')}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Telefono</label>
-                    <input type="tel" {...register('telefono')}></input>
+                    <input type="tel" className="input-text" {...register('telefono')}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Dirección</label>
-                    <input type="text" {...register('direccion')}></input>
+                    <input type="text" className="input-text"  {...register('direccion')}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Sección</label>
-                    <input type="number" {...register('seccion')}></input>
+                    <input type="number" className="input-text" {...register('seccion')}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Horas de trabajo asignadas</label>
-                    <input type="number" {...register('horasTrabajoXDia')}></input>
+                    <input type="number" className="input-text" {...register('horasTrabajoXDia')}></input>
                 </div>
                 
                 <h1>Datos de usuario</h1>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Correo electronico</label>
-                    <input type="email"  {...register('correo',{autoComplete:"off"})}></input>
+                    <input type="email" className="input-text" {...register('correo',{autoComplete:"off"})}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Contraseña</label>
-                    <input type="password"  {...register('contrasena',{autoComplete:"off"})}></input>
+                    <input type="password" className="input-text" {...register('contrasena',{autoComplete:"off"})}></input>
                 </div>
 
-                <div>
+                <div className="contenedor-input">
                     <label>Confirmar contraseña</label>
-                    <input type="password" {...register('confirmar')}></input>
+                    <input type="password" className="input-text" {...register('confirmar')}></input>
                 </div>
 
                 <div>
                     <label><b>¿Es administrador?</b></label>
-                    <div>
+                    <div className="contenedor-radio">
                         <label>
                             <input
+                                className="input-radio"
                                 type="radio"
                                 value="true"
                                 {...register('rh')}
@@ -117,6 +121,7 @@ function Formulario(){
 
                         <label>
                             <input
+                                className="input-radio-no"
                                 type="radio"
                                 value="false"
                                 {...register('rh')}
@@ -125,7 +130,7 @@ function Formulario(){
                         </label>
                     </div>
                 </div>
-                <input type="submit" value="Agregar" />
+                <input type="submit" value="Agregar" className="boton-submit"/>
             </form>
         </div>
         

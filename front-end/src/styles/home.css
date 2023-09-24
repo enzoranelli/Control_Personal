@@ -1,0 +1,13 @@
+
+
+@media screen and (max-width: 768px) {
+    
+    .contenedor-principal{
+      height: auto; 
+      padding: 20px; 
+    }
+    .qr-imagen{
+        width: 100%;
+        height: auto;
+    }
+  }

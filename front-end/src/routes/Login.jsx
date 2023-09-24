@@ -1,4 +1,5 @@
-
+import imagen from '../images/login-imagen.png';
+import '../styles/Login.css'
 import {useState} from "react";
 import { useAuth } from '../auth/authProvider.jsx';
 import { Navigate, useNavigate } from "react-router-dom";
@@ -9,8 +10,7 @@ import axios from 'axios';
 export default function Login(){
     const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
-    const [errorResponse, setErrorResponse] = useState('');
-
+    const [error, setError] = useState('');
     const auth = useAuth();
     const goTo = useNavigate();
 
@@ -18,22 +18,31 @@ export default function Login(){
     
     async function handleSubmit(e){
         e.preventDefault();
-        try {
-            const apiUrl = `${API_URL}/login`;
-            const data = {correo: correo, password: password};
-            // Realiza una solicitud POST utilizando Axios
-            axios.post(apiUrl, data, {headers: headers})
-            .then((response) => {
-                console.log(response)
-                auth.guardarUsuario(response.data.body);
-                
-            })
-            .catch((error) => {
+        if(correo !== '' && password !== ''){
+            try {
+                const apiUrl = `${API_URL}/login`;
+                const data = {correo: correo, password: password};
+                // Realiza una solicitud POST utilizando Axios
+                axios.post(apiUrl, data, {headers: headers})
+                .then((response) => {
+                    console.log(response)
+                    auth.guardarUsuario(response.data.body);
+                    
+                })
+                .catch((error) => {
+                    if(error.response && error.response.data){
+                        setError(error.response.data.body);
+                    }else{
+                        setError('Error en la solicitud al servidor');
+                    }
+                });
+            } catch (error) {
                 console.error('Error al enviar el JSON:', error);
-            });
-        } catch (error) {
-            console.error('Error al enviar el JSON:', error);
+            }
+        }else{
+            setError('Campos vacios');
         }
+        
     }
 
    
@@ -43,11 +52,14 @@ export default function Login(){
 
     return(
         <div>
+            
             <form className="form" onSubmit={handleSubmit}>
-                <h1>Login</h1>
-                
+                <h1>Bienevenido a <span className="resaltado">User Testing</span></h1>
+                <img className="imagen-logo"  src={imagen} alt="Logo de empresa" />
+                {error !== '' && (<p className='error'>¡{error}!</p>)}
                 <label>Correo</label>
                 <input 
+                    className='input-login'
                     type="email"
                     value={correo}
                     onChange={(e) => setCorreo(e.target.value)} 
@@ -55,12 +67,13 @@ export default function Login(){
 
                 <label>Contraseña</label>
                 <input
+                className='input-login'
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
 
-                <button >Iniciar sesión</button>
+                <button className='boton-login'>Iniciar sesión</button>
             </form>
         </div>
     );

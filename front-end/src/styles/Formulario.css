@@ -1,0 +1,49 @@
+.boton-volver{
+    background: rgb(35, 108, 164);
+    padding: 10px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    color:rgb(255, 255, 255);
+}
+.contenedor-input{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.input-text{
+    height: 30px;
+    width: 400px;
+    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+
+.contenedor-radio{
+    margin: 10px 0px 10px 5px;
+}
+.input-radio{
+    margin-left: 20px;
+}
+
+.input-radio-no{
+    margin-left: 35px;
+}
+
+.boton-submit{
+    background: rgb(101, 170, 72);
+    width: 300px;
+    margin: 20px 0px 0px 20px;
+    padding: 15px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    color:rgb(255, 255, 255);
+}

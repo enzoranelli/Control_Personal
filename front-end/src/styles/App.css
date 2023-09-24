@@ -5,8 +5,10 @@
     align-items: center;
 }
 .contenedor-empleados{
-    
+    display: flex;
     width: 60%;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 .imagen-logo{
     width:200px;

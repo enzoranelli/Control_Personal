@@ -34,9 +34,7 @@ function Detalle() {
     ]
 
     useEffect(()=>{
-      const datos = {
-        id: id,
-      }
+      
       const fetchData = async() => {
         try {
           const response = await axios.get(`${API_URL}/entrada_salida/${id}`,{headers:headers});
@@ -57,7 +55,9 @@ function Detalle() {
 
     return (
       <div>
-        <Link to={`/${auth.userRole === 'admin' ? 'dashboard':'home'}`}>Volver</Link>
+        <Link to={`/${auth.userRole === 'admin' ? 'dashboard':'home'}`}>
+          <button>Volver al inicio</button>
+        </Link>
         <h2>Tabla de actividad</h2>
         <div className='contenedor-empleados'>
           <DataTable columns={colums} data={peticion.body} noDataComponent={<NoHayDatos />}/>

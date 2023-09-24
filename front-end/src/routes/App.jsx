@@ -116,6 +116,7 @@ function App() {
         </div>
 
         <div className='contenedor-empleados'>
+          <h2>Empleados</h2>
           <DataTable columns={colums} data={peticion.body} noDataComponent={<NoHayDatos />}/>
         </div>
         

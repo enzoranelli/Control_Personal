@@ -1,0 +1,67 @@
+.error{
+    color: red;
+    font-weight: bold;
+}
+.resaltado{
+    color:rgb(35, 108, 164); 
+}
+.form{
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1{
+    text-align: center;
+}
+.imagen-logo{
+    float: none;
+    margin: 0 auto;
+}
+label{
+    margin-bottom: 20px;
+}
+.input-login{
+    height: 30px;
+    width: 25%;
+    border-radius: 5px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+label{
+    text-align: center;
+}
+
+.boton-login{
+    margin-top: 10px;
+    width: 25%;
+    background: rgb(35, 108, 164);
+    padding: 10px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    color:rgb(255, 255, 255);
+}
+
+@media screen and (max-width: 768px) {
+    /* Estilos para pantallas de hasta 768px de ancho (ejemplo: dispositivos móviles) */
+    .form {
+      height: auto; /* Cambia la altura según sea necesario */
+      padding: 20px; /* Agrega espacio alrededor del formulario */
+    }
+  
+    .input-login {
+      width: 100%; /* Hacer que el ancho del input sea del 100% */
+    }
+    .boton-login{
+        width: 100%;
+    }
+    /* Otros ajustes de estilo */
+  }
