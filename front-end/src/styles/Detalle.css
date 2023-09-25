@@ -1,0 +1,25 @@
+.boton-eliminar{
+    margin:15px 10px 0px 0px;
+    background: rgb(255, 0, 0);
+    padding: 10px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color:rgb(255, 255, 255);
+}
+.boton-cancelar{
+    margin:15px 10px 0px 0px;
+    background: rgb(139, 139, 139);
+    padding: 10px;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    color:rgb(255, 255, 255);
+}
+

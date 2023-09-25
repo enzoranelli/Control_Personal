@@ -22,7 +22,6 @@ export default function Login(){
             try {
                 const apiUrl = `${API_URL}/login`;
                 const data = {correo: correo, password: password};
-                // Realiza una solicitud POST utilizando Axios
                 axios.post(apiUrl, data, {headers: headers})
                 .then((response) => {
                     console.log(response)
@@ -54,10 +53,10 @@ export default function Login(){
         <div>
             
             <form className="form" onSubmit={handleSubmit}>
-                <h1>Bienevenido a <span className="resaltado">User Testing</span></h1>
+                <h1 className="titulo">Bienevenido a <span className="resaltado">User Testing</span></h1>
                 <img className="imagen-logo"  src={imagen} alt="Logo de empresa" />
                 {error !== '' && (<p className='error'>¡{error}!</p>)}
-                <label>Correo</label>
+                <label className='label-login'>Correo</label>
                 <input 
                     className='input-login'
                     type="email"
@@ -65,7 +64,7 @@ export default function Login(){
                     onChange={(e) => setCorreo(e.target.value)} 
                 />
 
-                <label>Contraseña</label>
+                <label className='label-login'>Contraseña</label>
                 <input
                 className='input-login'
                     type="password"

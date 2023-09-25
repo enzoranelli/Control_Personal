@@ -6,13 +6,42 @@ import {API_URL, headers} from '../auth/constantes';
 import { Link } from "react-router-dom";
 import { useAuth } from '../auth/authProvider.jsx';
 import  NoHayDatos from '../components/noHayDatos';
+import Eliminar from '../components/Eliminar';
+import { useNavigate} from "react-router-dom";
+import '../styles/Detalle.css';
+
 
 function Detalle() {
     const auth = useAuth();
     const { id } = useParams();
     const [peticion, setPeticion] = useState([]);
-    // Utiliza el valor de 'id' para cargar los detalles específicos
-    // Puedes realizar una consulta a una API o una base de datos aquí
+    const [cartelAbierto, setCartelAbierto] = useState(false);
+    const navigate = useNavigate()
+
+    const handleDelete = () => {
+     
+      alert('Usuario eliminado');
+      setCartelAbierto(false);
+      const apiUrl = `${API_URL}/personal/${id}`;
+
+      try {
+        axios.delete(apiUrl,{headers: headers})
+        .then((response)=>{
+          console.log('Respuesta de la API:', response.data);
+          alert('Empleado eliminado exitosamente');
+          navigate('/dashboard');
+        })
+      } catch (error) {
+        console.error('Error al enviar el JSON:', error);
+      }
+      
+
+    };
+  
+    const handleCancel = () => {
+      setCartelAbierto(false); 
+    };
+  
     const colums = [
       {
         name: 'id',
@@ -42,8 +71,8 @@ function Detalle() {
          
           if(response.status === 200){
             console.log('datos recibidos correctamente');
-            console.log(response.data)
-            setPeticion(response.data)
+            console.log(response.data);
+            setPeticion(response.data);
           }
         } catch (error) {
           console.log(error);
@@ -56,12 +85,28 @@ function Detalle() {
     return (
       <div>
         <Link to={`/${auth.userRole === 'admin' ? 'dashboard':'home'}`}>
-          <button>Volver al inicio</button>
+          <button className="boton-volver">Volver al inicio</button>
         </Link>
         <h2>Tabla de actividad</h2>
-        <div className='contenedor-empleados'>
-          <DataTable columns={colums} data={peticion.body} noDataComponent={<NoHayDatos />}/>
+        <div className='contenedor-actividad'>
+          <DataTable columns={colums} data={peticion.body} noDataComponent={<NoHayDatos />} pagination/>
         </div>
+        {auth.userRole === 'admin' ? (
+        <>
+          <button 
+            className="boton-eliminar"
+            onClick={()=> setCartelAbierto(true)}>
+              Eliminar
+          </button>
+          <Eliminar
+            estaAbierto={cartelAbierto}
+            confirmar={handleDelete}
+            cancelar={handleCancel}
+          />
+        </>
+        ) : (
+          <></>
+        )}
       </div>
     );
   }

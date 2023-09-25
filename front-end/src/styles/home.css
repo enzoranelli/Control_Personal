@@ -1,8 +1,6 @@
-
-
 @media screen and (max-width: 768px) {
     
-    .contenedor-principal{
+    .contenedor-home{
       height: auto; 
       padding: 20px; 
     }

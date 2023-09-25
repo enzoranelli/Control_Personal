@@ -27,11 +27,20 @@ module.exports = function(dbjinyec){
     function buscarId(dni){
         return db.buscarId(dni);
     }
+
+    function eliminar(id){
+        return db.eliminar(TABLA,id,'id');
+    }
+    function eliminarUsuario(id){
+        return db.eliminar('usuario',id,'Persona');
+    }
     return {
         todos,
         uno,
         agregar,
         agregarUsuario,
         buscarId,
+        eliminarUsuario,
+        eliminar,
     }
 }

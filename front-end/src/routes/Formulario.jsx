@@ -2,19 +2,18 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate} from "react-router-dom";
 import axios from 'axios';
-import {API_URL} from '../auth/constantes'
+import {API_URL, headers} from '../auth/constantes'
 import '../styles/Formulario.css';
 
 function Formulario(){
     const {register, handleSubmit} = useForm();
     const navigate = useNavigate()
-    const headers={
-        "ngrok-skip-browser-warning": "69420",
-    }
+
+    
     const onSubmit = (data) =>{
         const apiUrl = `${API_URL}/personal`;
         const verificar = verificarFormulario(data);
-        // Realiza una solicitud POST utilizando Axios
+        
         console.log(verificar)
         if(verificar){
             axios.post(apiUrl, data, {headers:headers})
@@ -50,17 +49,18 @@ function Formulario(){
     }
 
     return(
+
         <div>
             <Link to={"/dashboard"}><button className="boton-volver">Volver al inicio</button></Link>
             <h1>Agregar empleado</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="form-agregar" onSubmit={handleSubmit(onSubmit)}>
                 <div className="contenedor-input">
-                    <label>Nombre</label>
+                    <label className="label-form">Nombre</label>
                     <input type="text" className="input-text" {...register('Nombre')}></input>
                 </div>
 
                 <div className="contenedor-input">
-                    <label>Documento</label>
+                    <label>Documento<b>**</b></label>
                     <input type="number" className="input-text" {...register('DNI')}></input>
                 </div>
 
@@ -92,7 +92,7 @@ function Formulario(){
                 <h1>Datos de usuario</h1>
 
                 <div className="contenedor-input">
-                    <label>Correo electronico</label>
+                    <label>Correo electronico<b>**</b></label>
                     <input type="email" className="input-text" {...register('correo',{autoComplete:"off"})}></input>
                 </div>
 
@@ -130,6 +130,7 @@ function Formulario(){
                         </label>
                     </div>
                 </div>
+                <p className="aviso">{'(**) Los campos marcados tienen que ser unicos para cada empleado.'}</p>
                 <input type="submit" value="Agregar" className="boton-submit"/>
             </form>
         </div>

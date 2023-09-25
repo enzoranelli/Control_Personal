@@ -1,6 +1,13 @@
 .error{
     color: red;
     font-weight: bold;
+    background-color: pink;
+    width: 25%;
+    text-align: center;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: red;
 }
 .resaltado{
     color:rgb(35, 108, 164); 
@@ -12,16 +19,15 @@
     justify-content: center;
     align-items: center;
 }
-h1{
+.titulo{
     text-align: center;
 }
 .imagen-logo{
     float: none;
     margin: 0 auto;
 }
-label{
-    margin-bottom: 20px;
-}
+
+
 .input-login{
     height: 30px;
     width: 25%;
@@ -33,8 +39,9 @@ label{
     text-align: center;
 }
 
-label{
+.label-login{
     text-align: center;
+    margin-bottom: 20px;
 }
 
 .boton-login{
@@ -47,7 +54,12 @@ label{
     border: none;
     border-radius: 5px;
     font-weight: bold;
+    cursor: pointer;
     color:rgb(255, 255, 255);
+}
+
+.boton-login:hover{
+    background-color: rgb(101, 170, 72);
 }
 
 @media screen and (max-width: 768px) {
@@ -64,4 +76,4 @@ label{
         width: 100%;
     }
     /* Otros ajustes de estilo */
-  }
+}

@@ -52,3 +52,20 @@
     height:100%;
     width: 40%;
 }
+
+@media screen and (max-width: 768px) {
+    .contenedor-principal{
+        display: flex;
+        flex-direction: column;
+    }
+    .contenedor-botones{
+        width: 100%;
+    }
+    .boton{
+        width: 80%;
+    }
+    .contenedor-empleados{
+        width: 100%;
+        display: block;
+    }
+}

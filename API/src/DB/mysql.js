@@ -77,7 +77,7 @@ function uno(tabla, id){
             if(error){
                 return reject(error);
             }
-            return result.length === 0 ? reject(error) : resolve(result);
+            return result.length === 0 ? reject(error) : resolve(result[0]);
             
         });
     });
@@ -121,7 +121,18 @@ function existe(tabla, correo){
             
             return result.length === 0 ? reject(error) : resolve(result);
         })
-    })
+    });
+}
+
+function eliminar(tabla, id, condicion){
+    return new Promise((resolve,reject)=>{
+        conexion.query(`DELETE FROM ${tabla} WHERE ${condicion} = ${id}`,(error,result)=>{
+            if(error){
+                return reject(error);
+            }
+            return resolve(result);
+        })
+    });
 }
 
 
@@ -130,6 +141,7 @@ module.exports = {
     todos,
     uno,
     existe,
+    eliminar,
     agregar,
     agregarUsuario,
     buscarId,

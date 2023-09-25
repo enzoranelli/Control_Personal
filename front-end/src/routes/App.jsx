@@ -5,8 +5,7 @@ import axios from 'axios';
 import Boton from '../components/boton';
 import Logo from '../components/Logo';
 import cruz from '../images/mas.png';
-import lupa from '../images/busqueda.png';
-import {API_URL} from '../auth/constantes';
+import {API_URL , headers} from '../auth/constantes';
 import { useAuth } from '../auth/authProvider.jsx';
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import NoHayDatos from '../components/noHayDatos';
@@ -14,11 +13,7 @@ import NoHayDatos from '../components/noHayDatos';
 function App() {
   const auth = useAuth();
   const [peticion, setPeticion] = useState([]);
-  const headers={
-    "ngrok-skip-browser-warning": "69420",
-  }
  
-
   if (!auth.isAuthenticated) {
     return <Navigate to="/" />;
   }
@@ -79,16 +74,12 @@ function App() {
         <Link to={`/detalle/${row.id}`}>Ver Detalles</Link>
       ),
     },
-    
-    
   ]
-  useEffect(()=>{
 
+  useEffect(()=>{
     const fetchData = async() => {
       try {
         const response = await axios.get(`${API_URL}/personal`,{headers:headers});
-        
-       
         if(response.status === 200){
           console.log('datos recibidos correctamente');
           console.log(response.data)
@@ -103,27 +94,24 @@ function App() {
 
   return (
       <>
-        
-        
-        
       <Logo></Logo>
       <div className='contenedor-principal'>
         <div className='contenedor-botones'>
-          
-          {/*<Boton texto='Hacer Consulta' imagen={lupa} url='consulta'/>*/}
           <Boton texto='Agregar empleado nuevo' imagen={cruz} url='formulario'/>
-            
         </div>
 
         <div className='contenedor-empleados'>
           <h2>Empleados</h2>
-          <DataTable columns={colums} data={peticion.body} noDataComponent={<NoHayDatos />}/>
-        </div>
-        
-      </div> 
-        
+          <DataTable 
+            columns={colums} 
+            data={peticion.body} 
+            noDataComponent={<NoHayDatos />} 
+            pagination
+            className="tabla-empleados"
+          />
+        </div>    
+      </div>       
       </>
-      
   )
 }
 
