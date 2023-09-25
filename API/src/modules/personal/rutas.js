@@ -22,15 +22,17 @@ async function todos(req,res,next){
 
 async function eliminar(req,res,next){
     try {
-        const item = await controlador.eliminarUsuario(req.params.id);
+        const item = await controlador.eliminarUsuario(req.params['id']);
+        console.log(item)
         if(item){           
-            const eliminarPersonal = await controlador.eliminar(req.params.id);
+            const eliminarPersonal = await controlador.eliminar(req.params['id']);
+            console.log(eliminarPersonal)
             respuestas.success(req,res, 'Usuario eliminado exitosamente!',200);
         }else{
-            respuestas.error(req,res, 'Error al eliminar usuario',200);
+            respuestas.error(req,res, 'Error al eliminar usuario en else',200);
         }
     } catch (error) {
-        respuestas.error(req,res, 'Error al eliminar usuario',200);
+        respuestas.error(req,res, 'Error al eliminar usuario en catch',200);
     }
 }    
 
