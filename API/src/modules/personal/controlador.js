@@ -34,6 +34,9 @@ module.exports = function(dbjinyec){
     function eliminarUsuario(id){
         return db.eliminar('usuario',id,'Persona');
     }
+    function eliminarEntradaSalida(id){
+        return db.eliminar('ingreso_salida',id,'Persona');
+    }
     return {
         todos,
         uno,
@@ -42,5 +45,6 @@ module.exports = function(dbjinyec){
         buscarId,
         eliminarUsuario,
         eliminar,
+        eliminarEntradaSalida,
     }
 }

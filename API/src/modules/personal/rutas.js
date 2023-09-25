@@ -25,14 +25,18 @@ async function eliminar(req,res,next){
         const item = await controlador.eliminarUsuario(req.params['id']);
         console.log(item)
         if(item){           
-            const eliminarPersonal = await controlador.eliminar(req.params['id']);
-            console.log(eliminarPersonal)
-            respuestas.success(req,res, 'Usuario eliminado exitosamente!',200);
+            const entrada_salida = await controlador.eliminarEntradaSalida(req.params['id']);
+            console.log(entrada_salida);
+            if(entrada_salida){
+                const eliminarPersonal = await controlador.eliminar(req.params['id']);
+                console.log(eliminarPersonal);
+                respuestas.success(req,res,'El registro del empleado ha sido eliminado exitosamente.',200);
+            }
         }else{
-            respuestas.error(req,res, 'Error al eliminar usuario en else',200);
+            respuestas.error(req,res, 'Error al eliminar usuario en else',500);
         }
     } catch (error) {
-        respuestas.error(req,res, 'Error al eliminar usuario en catch',200);
+        respuestas.error(req,res, 'Error al eliminar usuario en catch',500);
     }
 }    
 
